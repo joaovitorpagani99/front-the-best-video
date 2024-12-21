@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { getToken } from '../utils/useToken';
+import { getToken } from '../utils/useToken'
 
 const api = axios.create({
-  baseURL: 'https://localhost:3000',
+  baseURL: 'http://localhost:3000',
 });
 
 api.interceptors.request.use(async config => {

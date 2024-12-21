@@ -2,27 +2,29 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import Home from "../pages/Home/home";
 import Signin from "../pages/Signin/sigin";
 import Signup from "../pages/Signup/signup";
-import { useContext } from "react";
-import { authContext } from "../context/auth";
-
+import useAuth from "../hooks/useAuth";
+import PropTypes from "prop-types";
 
 const Private = ({ Item }) => {
-  const { signed } = useContext(authContext);
+  const { signed } = useAuth();
   return signed ? <Item /> : <Signin />;
+};
+
+Private.propTypes = {
+  Item: PropTypes.elementType.isRequired,
 };
 
 const RouterApp = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Private Item={Home} />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="**" element={<Signin />} />
+        <Route path="*" element={<Signin />} />
       </Routes>
     </BrowserRouter>
-  )
-}
-
+  );
+};
 
 export default RouterApp;
