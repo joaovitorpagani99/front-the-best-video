@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import api from "../services/api";
 import useToken from "../utils/useToken";
 import authContext from "./authContext";
+import { data } from "react-router";
 
 export const AuthProvider = ({ children }) => {
   const { token, setToken } = useToken();
@@ -46,6 +47,26 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const RankedVideos = async () => {
+    try {
+      const response = await api.get("/video");
+      return {
+        status: response.data.type,
+        message: response.data.message,
+        data: response.data.data,
+      };
+    } catch (error) {
+      console.error("Signup failed:", error);
+      if (error.response && error.response.data) {
+        const errorMessage = error.response.data.message.message
+          ? error.response.data.message.message
+          : error.response.data.message.message[0];
+        return { status: "error", message: errorMessage };
+      }
+      return { status: "error", message: "Erro ao cadastrar usuário" };
+    }
+  };
+
   const signout = () => {
     setUser(null);
     setToken(null);
@@ -53,7 +74,15 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <authContext.Provider
-      value={{ user, token, signed: !!user, signin, signup, signout }}
+      value={{
+        user,
+        token,
+        signed: !!user,
+        signin,
+        signup,
+        signout,
+        RankedVideos,
+      }}
     >
       {children}
     </authContext.Provider>
