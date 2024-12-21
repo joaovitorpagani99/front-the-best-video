@@ -4,7 +4,7 @@
   justify-content: center;
   flex-direction: column;
   gap: 10px;
-  height: 100vh;
+  height: 93vh;
 }
 
 .content {
@@ -24,7 +24,7 @@
 .label {
   font-size: 18px;
   font-weight: 600;
-  color: #676767;
+  color: black;
 }
 
 .labelsignup {

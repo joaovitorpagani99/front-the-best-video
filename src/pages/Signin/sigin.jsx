@@ -39,7 +39,7 @@ const Signin = () => {
 
   return (
     <div className={styles.container}>
-      <label className={styles.label}>SISTEMA DE LOGIN</label>
+      <label className={styles.label}>LOGIN</label>
       <div className={styles.content}>
         <Input
           types="email"
