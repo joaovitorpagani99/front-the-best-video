@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import api from "../services/api";
 import useToken from "../utils/useToken";
 import authContext from "./authContext";
-import { data } from "react-router";
 
 export const AuthProvider = ({ children }) => {
   const { token, setToken } = useToken();
@@ -17,7 +16,6 @@ export const AuthProvider = ({ children }) => {
       setUser({ email });
       return { status: "success", message: "Login efetuado com sucesso!" };
     } catch (error) {
-      console.error("Login failed:", error);
       if (error.response && error.response.data) {
         const errorMessage = error.response.data.message.message
           ? error.response.data.message.message
@@ -36,7 +34,6 @@ export const AuthProvider = ({ children }) => {
       setToken({ token: data.access_token });
       return { status: "success", message: "Usuário cadastrado com sucesso!" };
     } catch (error) {
-      console.error("Signup failed:", error);
       if (error.response && error.response.data) {
         const errorMessage = error.response.data.message.message
           ? error.response.data.message.message
@@ -56,14 +53,53 @@ export const AuthProvider = ({ children }) => {
         data: response.data.data,
       };
     } catch (error) {
-      console.error("Signup failed:", error);
       if (error.response && error.response.data) {
         const errorMessage = error.response.data.message.message
           ? error.response.data.message.message
           : error.response.data.message.message[0];
         return { status: "error", message: errorMessage };
       }
-      return { status: "error", message: "Erro ao cadastrar usuário" };
+      return {
+        status: "error",
+        message: "Erro ao buscar vídeos classificados",
+      };
+    }
+  };
+
+  const getVotingVideos = async () => {
+    try {
+      const response = await api.get("/video/vote");
+      return {
+        status: response.data.type,
+        message: response.data.message,
+        data: response.data.data,
+      };
+    } catch (error) {
+      if (error.response && error.response.data) {
+        const errorMessage = error.response.data.message.message
+          ? error.response.data.message.message
+          : error.response.data.message.message[0];
+        return { status: "error", message: errorMessage };
+      }
+      return { status: "error", message: "Erro ao buscar vídeos para votação" };
+    }
+  };
+
+  const voteForVideo = async (videoId) => {
+    try {
+      const response = await api.post("/vote", { videoId, vote: 1 });
+      return {
+        status: response.data.type,
+        message: response.data.message,
+      };
+    } catch (error) {
+      if (error.response && error.response.data) {
+        const errorMessage = error.response.data.message.message
+          ? error.response.data.message.message
+          : error.response.data.message.message[0];
+        return { status: "error", message: errorMessage };
+      }
+      return { status: "error", message: "Erro ao registrar voto" };
     }
   };
 
@@ -82,6 +118,8 @@ export const AuthProvider = ({ children }) => {
         signup,
         signout,
         RankedVideos,
+        getVotingVideos,
+        voteForVideo,
       }}
     >
       {children}

@@ -5,6 +5,7 @@ import Signup from "../pages/Signup/signup";
 import useAuth from "../hooks/useAuth";
 import PropTypes from "prop-types";
 import Menu from "../components/navBar/navBar";
+import Vote from "../pages/Vote/Vote";
 
 const Private = ({ Item }) => {
   const { signed } = useAuth();
@@ -23,6 +24,7 @@ const RouterApp = () => {
       {signed && <Menu />}
       <Routes>
         <Route path="/dashboard" element={<Private Item={Home} />} />
+        <Route path="/vote" element={<Private Item={Vote} />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<Signin />} />

@@ -1,0 +1,38 @@
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 32px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.videoContainer {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.videoItem {
+  flex: 1;
+  box-sizing: border-box;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s ease;
+}
+
+.videoItem:hover {
+  background-color: #f1f1f1;
+}
+
+video {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
