@@ -6,10 +6,10 @@ const Menu = () => {
     <nav className={styles.menu}>
       <ul>
         <li>
-          <Link to="/dashboard">Ranked Videos</Link>
+          <Link to="/dashboard">Vídeos Classificados</Link>
         </li>
         <li>
-          <Link to="/vote">Vote Videos</Link>
+          <Link to="/vote">Votar em Vídeos</Link>
         </li>
       </ul>
     </nav>

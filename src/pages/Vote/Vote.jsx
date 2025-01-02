@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
-import Button from "../../components/Button/button";
 import { toast } from "react-toastify";
-import useAuth from "../../hooks/useAuth"; 
+import useAuth from "../../hooks/useAuth";
 
 const Vote = () => {
   const [videos, setVideos] = useState([]);
@@ -44,7 +43,11 @@ const Vote = () => {
   };
 
   if (loading) {
-    return <div>Carregando...</div>;
+    return (
+      <div className={styles.loading}>
+        <div className={styles.spinner}></div>
+      </div>
+    );
   }
 
   return (
@@ -53,16 +56,12 @@ const Vote = () => {
       <div className={styles.videoContainer}>
         {videos.map((video) => (
           <div key={video.id} className={styles.videoItem}>
-            <h2>{video.title}</h2>
+            <h2 className={styles.titleVideo}>{video.title}</h2>
             <video controls>
               <source src={video.url} type="video/mp4" />
               Seu navegador não suporta o elemento de vídeo.
             </video>
-            <Button
-              text="Votar"
-              onClick={() => handleVote(video.id)}
-              types="button"
-            />
+            <button onClick={() => handleVote(video.id)}>Votar</button>
           </div>
         ))}
       </div>

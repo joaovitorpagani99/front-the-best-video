@@ -43,13 +43,17 @@ const Home = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.banner}>
+        <h1>Bem-vindo ao Melhor Site de Vídeos!</h1>
+        <p>Assista, vote e compartilhe seus vídeos favoritos.</p>
+      </div>
       <h1 className={styles.title}>Ranked Videos</h1>
       <ul className={styles.videoList}>
         {videos.map((video) => (
           <li key={video.id} className={styles.videoItem}>
             <h2>{video.title}</h2>
             <p>Rating: {video.rating}</p>
-            <video controls>
+            <video controls aria-label={`Vídeo: ${video.title}`}>
               <source src={video.url} type="video/mp4" />
               Your browser does not support the video tag.
             </video>

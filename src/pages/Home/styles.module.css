@@ -3,6 +3,8 @@
   max-width: 1200px;
   margin: 0 auto;
   box-sizing: border-box;
+  padding-top: 70px;
+
 }
 
 .title {
@@ -26,13 +28,15 @@
   margin-bottom: 20px;
   padding: 15px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #f9f9f9;
-  transition: background-color 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .videoItem:hover {
-  background-color: #f1f1f1;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .videoItem h2 {
@@ -48,7 +52,7 @@
 .videoItem video {
   width: 100%;
   height: auto;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .pagination {
@@ -56,4 +60,13 @@
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+}
+
+.banner {
+  text-align: center;
+  padding: 20px;
+  background-color: #046ee5;
+  color: white;
+  margin-bottom: 20px;
+  border-radius: 10px;
 }
