@@ -7,3 +7,17 @@
   background-color: #faf2f5;
   border: none;
 }
+
+@media (max-width: 768px) {
+  .input {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .input {
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+}

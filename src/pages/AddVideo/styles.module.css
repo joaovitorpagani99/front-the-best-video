@@ -31,3 +31,23 @@
   font-size: 14px;
   color: red;
 }
+
+@media (max-width: 768px) {
+  .content {
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+}

@@ -97,3 +97,23 @@
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 768px) {
+  .videoItem {
+    flex: 1 1 calc(50% - 20px);
+  }
+
+  .title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .videoItem {
+    flex: 1 1 100%;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+}
