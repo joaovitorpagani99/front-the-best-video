@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
+import ReactPlayer from "react-player";
 
 const Vote = () => {
   const [videos, setVideos] = useState([]);
@@ -53,18 +54,25 @@ const Vote = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Vote no Melhor Vídeo</h1>
-      <div className={styles.videoContainer}>
+      <ul className={styles.videoList}>
         {videos.map((video) => (
-          <div key={video.id} className={styles.videoItem}>
-            <h2 className={styles.titleVideo}>{video.title}</h2>
-            <video controls>
-              <source src={video.url} type="video/mp4" />
-              Seu navegador não suporta o elemento de vídeo.
-            </video>
+          <li key={video.id} className={styles.videoItem}>
+            <h2>{video.title}</h2>
+            <p>Rating: {video.rating}</p>
+            <div className={styles.playerWrapper}>
+              <ReactPlayer
+                url={video.url}
+                className={styles.reactPlayer}
+                width="100%"
+                height="100%"
+                controls
+                aria-label={`Vídeo: ${video.title}`}
+              />
+            </div>
             <button onClick={() => handleVote(video.id)}>Votar</button>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

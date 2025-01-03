@@ -15,6 +15,7 @@
   margin: 0;
   padding: 0;
   justify-content: center;
+  align-items: center;
 }
 
 .menu ul li {
@@ -24,12 +25,31 @@
 .menu ul li a {
   color: white;
   text-decoration: none;
-  font-size: 18px;
-  padding: 10px 15px;
+  font-size: 16px;
+  padding: 8px 12px;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .menu ul li a:hover {
+  background-color: #0353a4;
+  border-radius: 5px;
+}
+
+.logoutItem {
+  margin-left: auto;
+}
+
+.logoutButton {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px 12px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logoutButton:hover {
   background-color: #0353a4;
   border-radius: 5px;
 }

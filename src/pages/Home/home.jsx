@@ -3,21 +3,20 @@ import styles from "./styles.module.css";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import { Pagination } from "react-bootstrap";
+import ReactPlayer from "react-player";
 
 const Home = () => {
   const [videos, setVideos] = useState([]);
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [videosPerPage] = useState(5);
   const { RankedVideos } = useAuth();
 
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await RankedVideos(page, 3);
+        const response = await RankedVideos();
         if (response.status === "success") {
           setVideos(response.data);
-          setTotalPages(response.totalPages || 1);
-          console.log(response);
         } else {
           toast.error("Failed to fetch videos");
         }
@@ -27,10 +26,14 @@ const Home = () => {
       }
     };
     fetchVideos();
-  }, [RankedVideos, page]);
+  }, [RankedVideos]);
+
+  const indexOfLastVideo = page * videosPerPage;
+  const indexOfFirstVideo = indexOfLastVideo - videosPerPage;
+  const currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo);
 
   const handleNextPage = () => {
-    if (page < totalPages) {
+    if (page < Math.ceil(videos.length / videosPerPage)) {
       setPage(page + 1);
     }
   };
@@ -49,14 +52,20 @@ const Home = () => {
       </div>
       <h1 className={styles.title}>Ranked Videos</h1>
       <ul className={styles.videoList}>
-        {videos.map((video) => (
+        {currentVideos.map((video) => (
           <li key={video.id} className={styles.videoItem}>
             <h2>{video.title}</h2>
             <p>Rating: {video.rating}</p>
-            <video controls aria-label={`Vídeo: ${video.title}`}>
-              <source src={video.url} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            <div className={styles.playerWrapper}>
+              <ReactPlayer
+                url={video.url}
+                className={styles.reactPlayer}
+                width="100%"
+                height="100%"
+                controls
+                aria-label={`Vídeo: ${video.title}`}
+              />
+            </div>
           </li>
         ))}
       </ul>
@@ -65,7 +74,7 @@ const Home = () => {
         <Pagination.Item active>{page}</Pagination.Item>
         <Pagination.Next
           onClick={handleNextPage}
-          disabled={page === totalPages}
+          disabled={page === Math.ceil(videos.length / videosPerPage)}
         />
       </Pagination>
     </div>

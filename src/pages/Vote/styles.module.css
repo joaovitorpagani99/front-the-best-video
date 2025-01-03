@@ -12,12 +12,13 @@
   text-align: center;
 }
 
-.videoContainer {
+.videoList {
   display: flex;
-  margin-top: 75px;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .videoItem {
@@ -30,12 +31,6 @@
   background-color: #f9f9f9;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.titleVideo {
-  font-size: 20px;
-  margin-bottom: 10px;
-  text-align: center;
 }
 
 .videoItem:hover {
@@ -53,16 +48,21 @@
   font-size: 14px;
 }
 
-.videoItem video {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-bottom: 20px;
+.playerWrapper {
+  position: relative;
+  padding-top: 56.25%;
+  /* 16:9 Aspect Ratio */
+}
+
+.reactPlayer {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .videoItem button {
   display: block;
-  margin: 0 auto;
+  margin: 10px auto 0 auto;
   width: 50%;
   padding: 10px;
   background-color: #046ee5;
