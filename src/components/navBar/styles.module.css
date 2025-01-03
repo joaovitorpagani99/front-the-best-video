@@ -8,7 +8,14 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.menu ul {
+.hamburger {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+}
+
+.menuList {
   list-style: none;
   display: flex;
   gap: 20px;
@@ -18,11 +25,11 @@
   align-items: center;
 }
 
-.menu ul li {
+.menuList li {
   display: inline;
 }
 
-.menu ul li a {
+.menuList li a {
   color: white;
   text-decoration: none;
   font-size: 16px;
@@ -30,7 +37,7 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.menu ul li a:hover {
+.menuList li a:hover {
   background-color: #0353a4;
   border-radius: 5px;
 }
@@ -52,4 +59,40 @@
 .logoutButton:hover {
   background-color: #0353a4;
   border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .menuList {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #046ee5;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .menuList.showMenu {
+    display: flex;
+  }
+
+  .menuList li {
+    display: block;
+    text-align: center;
+  }
+
+  .menuList li a {
+    display: block;
+    padding: 10px;
+  }
+
+  .logoutItem {
+    margin-left: 0;
+  }
 }

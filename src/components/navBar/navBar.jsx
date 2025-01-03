@@ -1,17 +1,26 @@
+import { useState } from "react";
 import { Link } from "react-router";
 import styles from "./styles.module.css";
 import useAuth from "../../hooks/useAuth";
 
 const Menu = () => {
   const { signout, user } = useAuth();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogout = () => {
     signout();
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <nav className={styles.menu}>
-      <ul>
+      <div className={styles.hamburger} onClick={toggleMenu}>
+        &#9776;
+      </div>
+      <ul className={`${styles.menuList} ${isMenuOpen ? styles.showMenu : ""}`}>
         <li>
           <Link to="/dashboard">Vídeos Classificados</Link>
         </li>
