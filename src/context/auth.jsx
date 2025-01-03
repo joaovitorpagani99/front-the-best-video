@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import api from "../services/api";
 import useToken from "../utils/useToken";
@@ -8,12 +8,21 @@ export const AuthProvider = ({ children }) => {
   const { token, setToken } = useToken();
   const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
   const signin = async (email, password) => {
     try {
       const response = await api.post("/auth/login", { email, password });
       const { access_token, isAdmin } = response.data;
       setToken({ token: access_token });
-      setUser({ email, isAdmin });
+      const userData = { email, isAdmin };
+      setUser(userData);
+      localStorage.setItem("user", JSON.stringify(userData));
       return { status: "success", message: "Login efetuado com sucesso!" };
     } catch (error) {
       if (error.response && error.response.data) {
@@ -233,6 +242,7 @@ export const AuthProvider = ({ children }) => {
   const signout = () => {
     setUser(null);
     setToken(null);
+    localStorage.removeItem("user");
   };
 
   return (
