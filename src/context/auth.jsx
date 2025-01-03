@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
   const { token, setToken } = useToken();
   const [user, setUser] = useState(null);
 
+  // Recupera o usuário armazenado no localStorage ao carregar o componente
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -15,6 +16,7 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  // Função para realizar o login
   const signin = async (email, password) => {
     try {
       const response = await api.post("/auth/login", { email, password });
@@ -35,6 +37,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Função para realizar o cadastro
   const signup = async (name, email, password) => {
     try {
       const response = await api.post("/users", { name, email, password });
@@ -53,6 +56,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Função para buscar vídeos classificados
   const RankedVideos = async () => {
     try {
       const response = await api.get("/video");
@@ -75,6 +79,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Função para buscar vídeos para votação
   const getVotingVideos = async () => {
     try {
       const response = await api.get("/video/vote");
@@ -94,6 +99,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Função para registrar um voto em um vídeo
   const voteForVideo = async (videoId) => {
     try {
       const response = await api.post("/vote", { videoId, vote: 1 });
@@ -112,6 +118,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Função para adicionar um novo vídeo
   const addVideo = async (videoData) => {
     try {
       const response = await api.post("/video", videoData);
@@ -130,6 +137,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Função para buscar usuários
   const getUsers = async () => {
     try {
       const response = await api.get("/users");
@@ -149,6 +157,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Função para deletar um usuário
   const deleteUser = async (userId) => {
     try {
       const response = await api.delete(`/users/${userId}`);
@@ -174,6 +183,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Função para deletar um vídeo
   const deleteVideo = async (videoId) => {
     try {
       const response = await api.delete(`/video/${videoId}`);
@@ -199,6 +209,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Função para buscar todos os vídeos
   const getVideos = async () => {
     try {
       const response = await api.get("/video");
@@ -217,6 +228,8 @@ export const AuthProvider = ({ children }) => {
       return { status: "error", message: "Erro ao buscar vídeos" };
     }
   };
+
+  // Função para adicionar um novo administrador
   const addAdmin = async ({ name, email, password }) => {
     try {
       const response = await api.post("/auth/admin", { name, email, password });
@@ -239,6 +252,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Função para realizar o logout
   const signout = () => {
     setUser(null);
     setToken(null);

@@ -90,3 +90,4 @@ Após iniciar o servidor de desenvolvimento, você pode acessar a aplicação no
 - **Administração**: Gerenciamento de usuários e vídeos por administradores.
 - **Notificações**: Exibição de notificações toast para feedback do usuário.
 
+

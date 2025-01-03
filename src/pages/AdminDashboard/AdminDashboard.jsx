@@ -16,6 +16,7 @@ const AdminDashboard = () => {
   const [newUserEmail, setNewUserEmail] = useState("");
   const [newUserPassword, setNewUserPassword] = useState("");
 
+  // Busca dados de vídeos e usuários ao carregar o componente
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,6 +40,7 @@ const AdminDashboard = () => {
     fetchData();
   }, [getVideos, getUsers]);
 
+  // Função para deletar um vídeo
   const handleDeleteVideo = async (videoId) => {
     try {
       const response = await deleteVideo(videoId);
@@ -54,6 +56,7 @@ const AdminDashboard = () => {
     }
   };
 
+  // Função para deletar um usuário
   const handleDeleteUser = async (userId) => {
     try {
       const response = await deleteUser(userId);
@@ -68,6 +71,7 @@ const AdminDashboard = () => {
     }
   };
 
+  // Função para adicionar um novo administrador
   const handleAddAdmin = async () => {
     try {
       const response = await addAdmin({
